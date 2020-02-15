@@ -26,13 +26,17 @@ public class OrderReceipt {
 
         // print date, bill no, customer name
 //        output.append("Date - " + order.getDate();
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
+        printCustomerInfo(output, order);
 //        output.append(order.getCustomerLoyaltyNumber());
 
         // prints lineItems
         printLineItems(output, order);
         return output.toString();
+    }
+
+    private static void printCustomerInfo(StringBuilder output, Order order) {
+        output.append(order.getCustomerName());
+        output.append(order.getCustomerAddress());
     }
 
     private static void printLineItems(StringBuilder output, Order order) {
