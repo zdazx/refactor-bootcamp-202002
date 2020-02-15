@@ -21,17 +21,17 @@ public class OrderReceipt {
     private String toPrintReceipt() {
         StringBuilder output = new StringBuilder();
 
-        // print headers
-        output.append("======Printing Orders======\n");
+        printHeaders(output);
 
-        // print date, bill no, customer name
-//        output.append("Date - " + order.getDate();
         printCustomerInfo(output, order);
-//        output.append(order.getCustomerLoyaltyNumber());
 
-        // prints lineItems
         printLineItems(output, order);
+
         return output.toString();
+    }
+
+    private void printHeaders(StringBuilder output) {
+        output.append("======Printing Orders======\n");
     }
 
     private static void printCustomerInfo(StringBuilder output, Order order) {
@@ -54,7 +54,6 @@ public class OrderReceipt {
 
             totalTax += getSalesTax(lineItem);
 
-            // calculate total amount of lineItem = price * quantity + 10 % sales tax
             totalAmount += lineItem.totalAmount();
         }
         printTotalTaxAndAmount(output, totalTax, totalAmount);
@@ -62,15 +61,11 @@ public class OrderReceipt {
     }
 
     private static void printTotalTaxAndAmount(StringBuilder output, double totalTax, double totalAmount) {
-        // prints the state tax
         output.append("Sales Tax").append('\t').append(totalTax);
-
-        // print total amount
         output.append("Total Amount").append('\t').append(totalAmount + totalTax);
     }
 
     private static double getSalesTax(LineItem lineItem) {
-        // calculate sales tax @ rate of 10%
         return lineItem.totalAmount() * .10;
     }
 }
