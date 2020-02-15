@@ -17,25 +17,31 @@ public class FibonacciTest {
 
     @Test
     public void should_return_1_when_calculate_given_position_is_1() {
-        int result = fibonacci.calculate(1);
+        Object result = fibonacci.calculate(1);
         assertThat(result, is(1));
     }
 
     @Test
     public void should_return_1_when_calculate_given_position_is_2() {
-        int result = fibonacci.calculate(2);
+        Object result = fibonacci.calculate(2);
         assertThat(result, is(1));
     }
 
     @Test
     public void should_return_2_when_calculate_given_position_is_3() {
-        int result = fibonacci.calculate(3);
+        Object result = fibonacci.calculate(3);
         assertThat(result, is(2));
     }
 
     @Test
-    public void should_return_55_when_calculate_gievn_position_is_10() {
-        int result = fibonacci.calculate(10);
+    public void should_return_55_when_calculate_given_position_is_10() {
+        Object result = fibonacci.calculate(10);
         assertThat(result, is(55));
+    }
+
+    @Test
+    public void should_return_12586269025L_when_calculate_position_is_55() {
+        Object result = fibonacci.calculate(50);
+        assertThat(result, is(12586269025L));
     }
 }
