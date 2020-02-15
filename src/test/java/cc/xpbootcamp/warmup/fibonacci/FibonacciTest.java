@@ -26,4 +26,16 @@ public class FibonacciTest {
         int result = fibonacci.calculate(2);
         assertThat(result, is(1));
     }
+
+    @Test
+    public void should_return_2_when_calculate_given_position_is_3() {
+        int result = fibonacci.calculate(3);
+        assertThat(result, is(2));
+    }
+
+    @Test
+    public void should_return_55_when_calculate_gievn_position_is_10() {
+        int result = fibonacci.calculate(10);
+        assertThat(result, is(55));
+    }
 }
