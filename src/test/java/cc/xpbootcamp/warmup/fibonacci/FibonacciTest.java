@@ -44,4 +44,17 @@ public class FibonacciTest {
         Object result = fibonacci.calculate(50);
         assertThat(result, is(12586269025L));
     }
+
+    @Test
+    public void should_return_0_when_calculate_position_is_0() {
+        Object result = fibonacci.calculate(0);
+        assertThat(result, is(0));
+    }
+
+    @Test
+    public void should_return_0_when_calculate_position_is_less_than_0() {
+        Object result = fibonacci.calculate(-1);
+        assertThat(result, is(0));
+
+    }
 }
