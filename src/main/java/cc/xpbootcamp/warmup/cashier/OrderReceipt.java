@@ -27,6 +27,11 @@ public class OrderReceipt {
 //        output.append(order.getCustomerLoyaltyNumber());
 
         // prints lineItems
+        printLineItems(output, order);
+        return output.toString();
+    }
+
+    private static void printLineItems(StringBuilder output, Order order) {
         double totSalesTx = 0d;
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
@@ -52,6 +57,5 @@ public class OrderReceipt {
 
         // print total amount
         output.append("Total Amount").append('\t').append(totalAmount);
-        return output.toString();
     }
 }
