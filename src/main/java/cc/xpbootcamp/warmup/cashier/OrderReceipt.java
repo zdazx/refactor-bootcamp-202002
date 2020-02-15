@@ -15,6 +15,10 @@ public class OrderReceipt {
     }
 
     public String printReceipt() {
+        return toPrintReceipt();
+    }
+
+    private String toPrintReceipt() {
         StringBuilder output = new StringBuilder();
 
         // print headers
