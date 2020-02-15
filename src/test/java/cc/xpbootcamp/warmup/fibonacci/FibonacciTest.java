@@ -55,6 +55,5 @@ public class FibonacciTest {
     public void should_return_0_when_calculate_position_is_less_than_0() {
         Object result = fibonacci.calculate(-1);
         assertThat(result, is(0));
-
     }
 }
