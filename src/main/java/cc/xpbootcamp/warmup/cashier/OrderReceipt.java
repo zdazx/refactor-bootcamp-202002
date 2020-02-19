@@ -33,6 +33,10 @@ public class OrderReceipt {
 
         output.append(printLineItems(order));
 
+        output.append("-----------------------------------\n");
+
+        output.append(printTotalTaxAndAmount(order));
+
         return output.toString();
     }
 
@@ -50,38 +54,25 @@ public class OrderReceipt {
 
     private static String printLineItems(Order order) {
         StringBuilder output = new StringBuilder();
-        double totalTax = 0d;
-        double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription()).append(", ");
             DecimalFormat df = new DecimalFormat("#.00");
             output.append(df.format(lineItem.getPrice())).append(" x ");
             output.append(lineItem.getQuantity()).append(", ");
             output.append(df.format(lineItem.totalAmount())).append('\n');
-
-            totalTax += getSalesTax(lineItem);
-
-            totalAmount += lineItem.totalAmount();
         }
-        output.append("-----------------------------------\n");
-        output.append(printTotalTaxAndAmount(order, totalTax, totalAmount));
         return output.toString();
     }
 
-    private static String printTotalTaxAndAmount(Order order, double totalTax, double totalAmount) {
+    private static String printTotalTaxAndAmount(Order order) {
         StringBuilder output = new StringBuilder();
         DecimalFormat df = new DecimalFormat("#.00");
-        output.append("税额").append(": ").append(df.format(totalTax)).append('\n');
+        output.append("税额").append(": ").append(df.format(order.getTotalTax())).append('\n');
         if (order.isHaveDiscount()) {
-            output.append("折扣").append(": ").append(df.format((totalAmount + totalTax) * 0.02)).append('\n');
-            output.append("总价").append(": ").append(df.format((totalAmount + totalTax) * 0.98)).append('\n');
+            output.append("折扣").append(": ").append(df.format(order.getTotalDiscount())).append('\n');
         }
-        output.append("总价").append(": ").append(df.format((totalAmount + totalTax))).append('\n');
+        output.append("总价").append(": ").append(df.format(order.getTotalAmount())).append('\n');
 
         return output.toString();
-    }
-
-    private static double getSalesTax(LineItem lineItem) {
-        return lineItem.totalAmount() * .10;
     }
 }
