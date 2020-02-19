@@ -54,9 +54,10 @@ public class OrderReceipt {
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription()).append(", ");
-            output.append(new DecimalFormat("#.00").format(lineItem.getPrice())).append(" x ");
+            DecimalFormat df = new DecimalFormat("#.00");
+            output.append(df.format(lineItem.getPrice())).append(" x ");
             output.append(lineItem.getQuantity()).append(", ");
-            output.append(new DecimalFormat("#.00").format(lineItem.totalAmount())).append('\n');
+            output.append(df.format(lineItem.totalAmount())).append('\n');
 
             totalTax += getSalesTax(lineItem);
 
@@ -69,12 +70,13 @@ public class OrderReceipt {
 
     private static String printTotalTaxAndAmount(Order order, double totalTax, double totalAmount) {
         StringBuilder output = new StringBuilder();
-        output.append("税额").append(": ").append(new DecimalFormat("#.00").format(totalTax)).append('\n');
+        DecimalFormat df = new DecimalFormat("#.00");
+        output.append("税额").append(": ").append(df.format(totalTax)).append('\n');
         if (order.isHaveDiscount()) {
-            output.append("折扣").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax) * 0.02)).append('\n');
-            output.append("总价").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax) * 0.98)).append('\n');
+            output.append("折扣").append(": ").append(df.format((totalAmount + totalTax) * 0.02)).append('\n');
+            output.append("总价").append(": ").append(df.format((totalAmount + totalTax) * 0.98)).append('\n');
         }
-        output.append("总价").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax))).append('\n');
+        output.append("总价").append(": ").append(df.format((totalAmount + totalTax))).append('\n');
 
         return output.toString();
     }
