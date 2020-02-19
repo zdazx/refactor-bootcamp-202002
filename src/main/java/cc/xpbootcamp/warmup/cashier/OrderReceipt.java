@@ -1,5 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import java.text.DecimalFormat;
+
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
  * price and amount. It also calculates the sales tax @ 10% and prints as part
@@ -23,7 +25,11 @@ public class OrderReceipt {
 
         output.append(printHeaders());
 
-        output.append(printCustomerInfo(order));
+        output.append('\n');
+
+        output.append(printOrderInfo(order));
+
+        output.append('\n');
 
         output.append(printLineItems(order));
 
@@ -36,10 +42,9 @@ public class OrderReceipt {
         return output.toString();
     }
 
-    private static String printCustomerInfo(Order order) {
+    private static String printOrderInfo(Order order) {
         StringBuilder output = new StringBuilder();
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
+        output.append(order.getDate());
         return output.toString();
     }
 
@@ -49,22 +54,28 @@ public class OrderReceipt {
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription()).append(", ");
-            output.append(lineItem.getPrice()).append(" x ");
+            output.append(new DecimalFormat("#.00").format(lineItem.getPrice())).append(" x ");
             output.append(lineItem.getQuantity()).append(", ");
-            output.append(lineItem.totalAmount()).append('\n');
+            output.append(new DecimalFormat("#.00").format(lineItem.totalAmount())).append('\n');
 
             totalTax += getSalesTax(lineItem);
 
             totalAmount += lineItem.totalAmount();
         }
-        output.append(printTotalTaxAndAmount(totalTax, totalAmount));
+        output.append("-----------------------------------\n");
+        output.append(printTotalTaxAndAmount(order, totalTax, totalAmount));
         return output.toString();
     }
 
-    private static String printTotalTaxAndAmount(double totalTax, double totalAmount) {
+    private static String printTotalTaxAndAmount(Order order, double totalTax, double totalAmount) {
         StringBuilder output = new StringBuilder();
-        output.append("税额").append(": ").append(totalTax);
-        output.append("总价").append(": ").append(totalAmount + totalTax);
+        output.append("税额").append(": ").append(new DecimalFormat("#.00").format(totalTax)).append('\n');
+        if (order.isHaveDiscount()) {
+            output.append("折扣").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax) * 0.02)).append('\n');
+            output.append("总价").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax) * 0.98)).append('\n');
+        }
+        output.append("总价").append(": ").append(new DecimalFormat("#.00").format((totalAmount + totalTax))).append('\n');
+
         return output.toString();
     }
 
