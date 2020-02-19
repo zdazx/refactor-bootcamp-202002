@@ -48,9 +48,9 @@ public class OrderReceipt {
         double totalTax = 0d;
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.getDescription()).append('\t');
-            output.append(lineItem.getPrice()).append('\t');
-            output.append(lineItem.getQuantity()).append('\t');
+            output.append(lineItem.getDescription()).append(", ");
+            output.append(lineItem.getPrice()).append(" x ");
+            output.append(lineItem.getQuantity()).append(", ");
             output.append(lineItem.totalAmount()).append('\n');
 
             totalTax += getSalesTax(lineItem);
@@ -63,8 +63,8 @@ public class OrderReceipt {
 
     private static String printTotalTaxAndAmount(double totalTax, double totalAmount) {
         StringBuilder output = new StringBuilder();
-        output.append("Sales Tax").append('\t').append(totalTax);
-        output.append("Total Amount").append('\t').append(totalAmount + totalTax);
+        output.append("税额").append(": ").append(totalTax);
+        output.append("总价").append(": ").append(totalAmount + totalTax);
         return output.toString();
     }
 
