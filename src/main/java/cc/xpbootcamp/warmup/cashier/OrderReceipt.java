@@ -21,25 +21,30 @@ public class OrderReceipt {
     private String toPrintReceipt() {
         StringBuilder output = new StringBuilder();
 
-        printHeaders(output);
+        output.append(printHeaders());
 
-        printCustomerInfo(output, order);
+        output.append(printCustomerInfo(order));
 
-        printLineItems(output, order);
+        output.append(printLineItems(order));
 
         return output.toString();
     }
 
-    private void printHeaders(StringBuilder output) {
+    private String printHeaders() {
+        StringBuilder output = new StringBuilder();
         output.append("======Printing Orders======\n");
+        return output.toString();
     }
 
-    private static void printCustomerInfo(StringBuilder output, Order order) {
+    private static String printCustomerInfo(Order order) {
+        StringBuilder output = new StringBuilder();
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
+        return output.toString();
     }
 
-    private static void printLineItems(StringBuilder output, Order order) {
+    private static String printLineItems(Order order) {
+        StringBuilder output = new StringBuilder();
         double totalTax = 0d;
         double totalAmount = 0d;
         for (LineItem lineItem : order.getLineItems()) {
@@ -52,12 +57,15 @@ public class OrderReceipt {
 
             totalAmount += lineItem.totalAmount();
         }
-        printTotalTaxAndAmount(output, totalTax, totalAmount);
+        output.append(printTotalTaxAndAmount(totalTax, totalAmount));
+        return output.toString();
     }
 
-    private static void printTotalTaxAndAmount(StringBuilder output, double totalTax, double totalAmount) {
+    private static String printTotalTaxAndAmount(double totalTax, double totalAmount) {
+        StringBuilder output = new StringBuilder();
         output.append("Sales Tax").append('\t').append(totalTax);
         output.append("Total Amount").append('\t').append(totalAmount + totalTax);
+        return output.toString();
     }
 
     private static double getSalesTax(LineItem lineItem) {
