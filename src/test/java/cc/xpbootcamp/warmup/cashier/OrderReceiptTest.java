@@ -23,7 +23,7 @@ class OrderReceiptTest {
     }
 
     @Test
-    void shouldPrintLineItemAndSalesTaxInfo() throws ParseException {
+    public void shouldPrintLineItemAndSalesTaxInfo() throws ParseException {
         List<LineItem> lineItems = new ArrayList<LineItem>() {{
             add(new LineItem("巧克力", 21.50, 2));
             add(new LineItem("小白菜", 10.00, 1));
