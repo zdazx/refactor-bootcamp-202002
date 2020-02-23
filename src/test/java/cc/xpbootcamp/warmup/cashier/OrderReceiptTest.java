@@ -30,7 +30,7 @@ class OrderReceiptTest {
         }};
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 EEEE", Locale.CHINA);
         Date date = sdf.parse("2020年2月19日 星期三");
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, date));
+        OrderReceipt receipt = new OrderReceipt(new Order(lineItems, date));
 
         String output = receipt.printReceipt();
 
@@ -50,7 +50,7 @@ class OrderReceiptTest {
             add(new LineItem("chocolate", 20.00, 1));
         }};
         Date date = sdf.parse("2020年2月18日 星期二");
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems, date));
+        OrderReceipt receipt = new OrderReceipt(new Order(lineItems, date));
 
         String output = receipt.printReceipt();
 
