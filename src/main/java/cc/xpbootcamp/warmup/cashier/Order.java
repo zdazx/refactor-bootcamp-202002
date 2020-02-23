@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class Order {
-    private String cName;
-    private String addr;
     private List<LineItem> lineItems;
     private String date;
     private boolean isHaveDiscount;
@@ -15,21 +13,11 @@ public class Order {
     private double totalAmount;
     private double totalDiscount;
 
-    public Order(String cName, String addr, List<LineItem> lineItems, Date date) {
-        this.cName = cName;
-        this.addr = addr;
+    public Order(List<LineItem> lineItems, Date date) {
         this.lineItems = lineItems;
         this.date = new SimpleDateFormat("yyyy年MM月dd日 EEEE", Locale.CHINA).format(date);
         this.isHaveDiscount = new SimpleDateFormat("EEEE", Locale.CHINA).format(date).equals("星期三");
         calculateBill();
-    }
-
-    public String getCustomerName() {
-        return cName;
-    }
-
-    public String getCustomerAddress() {
-        return addr;
     }
 
     public List<LineItem> getLineItems() {
