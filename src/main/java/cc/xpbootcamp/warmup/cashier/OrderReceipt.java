@@ -25,11 +25,11 @@ public class OrderReceipt {
 
         output.append(printHeaders());
 
-        output.append('\n');
+        output.append(printLineBreak());
 
         output.append(printOrderInfo(order));
 
-        output.append('\n');
+        output.append(printLineBreak());
 
         output.append(printLineItems(order));
 
@@ -40,15 +40,23 @@ public class OrderReceipt {
         return output.toString();
     }
 
+    private static String printLineBreak() {
+        StringBuilder output = new StringBuilder();
+        output.append('\n');
+        return output.toString();
+    }
+
     private String printSplitLine() {
         StringBuilder output = new StringBuilder() ;
-        output.append("-----------------------------------\n");
+        output.append("-----------------------------------");
+        output.append(printLineBreak());
         return output.toString();
     }
 
     private String printHeaders() {
         StringBuilder output = new StringBuilder();
-        output.append("===== 老王超市，值得信赖 ======\n");
+        output.append("===== 老王超市，值得信赖 ======");
+        output.append(printLineBreak());
         return output.toString();
     }
 
@@ -65,7 +73,8 @@ public class OrderReceipt {
             DecimalFormat df = new DecimalFormat("#.00");
             output.append(df.format(lineItem.getPrice())).append(" x ");
             output.append(lineItem.getQuantity()).append(", ");
-            output.append(df.format(lineItem.totalAmount())).append('\n');
+            output.append(df.format(lineItem.totalAmount()));
+            output.append(printLineBreak());
         }
         return output.toString();
     }
@@ -73,11 +82,12 @@ public class OrderReceipt {
     private static String printTotalTaxAndAmount(Order order) {
         StringBuilder output = new StringBuilder();
         DecimalFormat df = new DecimalFormat("#.00");
-        output.append("税额").append(": ").append(df.format(order.getTotalTax())).append('\n');
+
+        output.append("税额").append(": ").append(df.format(order.getTotalTax())).append(printLineBreak());
         if (order.isHaveDiscount()) {
-            output.append("折扣").append(": ").append(df.format(order.getTotalDiscount())).append('\n');
+            output.append("折扣").append(": ").append(df.format(order.getTotalDiscount())).append(printLineBreak());
         }
-        output.append("总价").append(": ").append(df.format(order.getTotalAmount())).append('\n');
+        output.append("总价").append(": ").append(df.format(order.getTotalAmount())).append(printLineBreak());
 
         return output.toString();
     }
