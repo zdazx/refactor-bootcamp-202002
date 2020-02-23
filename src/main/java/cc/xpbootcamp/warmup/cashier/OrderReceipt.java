@@ -62,6 +62,7 @@ public class OrderReceipt {
     private static String printOrderInfo(Order order) {
         StringBuilder output = new StringBuilder();
         output.append(order.getDate());
+        output.append(printLineBreak());
         return output.toString();
     }
 
