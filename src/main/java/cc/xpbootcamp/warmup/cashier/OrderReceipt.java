@@ -7,7 +7,6 @@ import java.text.DecimalFormat;
  * price and amount. It also calculates the sales tax @ 10% and prints as part
  * of order. It computes the total order amount (amount of individual lineItems +
  * total sales tax) and prints it.
- *
  */
 public class OrderReceipt {
     private Order order;
@@ -47,7 +46,7 @@ public class OrderReceipt {
     }
 
     private String printSplitLine() {
-        StringBuilder output = new StringBuilder() ;
+        StringBuilder output = new StringBuilder();
         output.append("-----------------------------------");
         output.append(printLineBreak());
         return output.toString();
