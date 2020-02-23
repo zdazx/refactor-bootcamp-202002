@@ -33,10 +33,16 @@ public class OrderReceipt {
 
         output.append(printLineItems(order));
 
-        output.append("-----------------------------------\n");
+        output.append(printSplitLine());
 
         output.append(printTotalTaxAndAmount(order));
 
+        return output.toString();
+    }
+
+    private String printSplitLine() {
+        StringBuilder output = new StringBuilder() ;
+        output.append("-----------------------------------\n");
         return output.toString();
     }
 
